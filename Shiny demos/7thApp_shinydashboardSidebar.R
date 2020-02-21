@@ -1,4 +1,4 @@
-# load the required library
+# load the required libraries
 library(shinydashboard)
 library(ggplot2)
 
