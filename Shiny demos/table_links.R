@@ -9,7 +9,7 @@ create_link <- function(row) {
   id <- gsub(" ", "", row["model"])
   
   # Generate an action link object using the unique ID and car model name
-  # onClick functions are JavaScript functions that executure when the object is clicke
+  # onClick functions are JavaScript functions that executure when the object is clicked
   # Shiny.setInputValue() sends a reactive value to R Shiny
   link <- actionLink(id, row["model"], onclick = paste0("Shiny.setInputValue('link', '", row["model"], "', {priority: 'event'})"))
   
@@ -17,7 +17,7 @@ create_link <- function(row) {
   return(toString(link))
 }
 
-# Shiny page
+# Define the UI for application that outputs a data table 
 ui <- fluidPage(
   DT::dataTableOutput('carTable')
 )
@@ -34,7 +34,7 @@ server <- function(input, output, session){
   # Convert "model" column values to hyperlinks (HTML code)
   df$model <- apply(df, 1, create_link)
   
-  # Set up data table
+  # Set up server logic for data table
   output$carTable <- DT::renderDataTable(df, escape = FALSE)
   
   # Display URL with query string when the the "link" button is clicked
